@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     public function classes()
     {
-        return $this->belongsToMany(Classe::class, 'class_user')
+        return $this->belongsToMany(Classe::class, 'class_user', 'user_id', 'class_id')
             ->withTimestamps();
     }
 
