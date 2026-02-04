@@ -38,6 +38,7 @@
 
     <!-- Template Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/ogency.css') }}" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 
