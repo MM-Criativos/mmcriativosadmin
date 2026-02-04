@@ -1,5 +1,25 @@
 # ==============================
-# Base: PHP + Nginx
+# 1️⃣ Stage: Node / Vite build
+# ==============================
+FROM node:20-alpine AS node-builder
+
+WORKDIR /app
+
+# Dependências do frontend
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Arquivos necessários para o build
+COPY resources ./resources
+COPY public ./public
+COPY vite.config.js ./
+
+# Build do Vite (gera public/build)
+RUN npm run build
+
+
+# ==============================
+# 2️⃣ Stage: PHP + Nginx
 # ==============================
 FROM webdevops/php-nginx:8.2
 
@@ -37,6 +57,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Código da aplicação
 # ==============================
 COPY . /app
+
+# ==============================
+# Copiar build do Vite
+# ==============================
+COPY --from=node-builder /app/public/build /app/public/build
 
 # ==============================
 # Instalar dependências PHP
