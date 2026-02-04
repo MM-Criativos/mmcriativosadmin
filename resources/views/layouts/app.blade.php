@@ -1,3 +1,5 @@
+@php $slot = $slot ?? null; @endphp
+
 <style>
     /* Modo claro */
     .icon-project.fa-duotone::before,

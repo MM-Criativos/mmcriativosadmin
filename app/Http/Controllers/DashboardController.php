@@ -522,6 +522,7 @@ class DashboardController extends Controller
             'availableYears' => $availableYears,
             'projectMonthChart' => $projectMonthChart,
             'weeklyStatusChart' => $weeklyStatusChart,
+            'user' => $user,
         ]);
     }
 
